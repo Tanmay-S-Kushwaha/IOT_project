@@ -6,6 +6,7 @@ class crypt():
         self.key = key
         if isinstance(self.key, str):
             self.key = self.key.encode()  # Convert string to bytes
+#             print(f"Key: {self.key}, Type: {type(self.key)}, Length: {len(self.key)}")
 
         
     def decrypt(self, data):
@@ -47,5 +48,4 @@ class crypt():
             return encrypted_data
         else:
             raise ValueError("data should be in a form of STR.")
-cryptoPrimitives.py
-Displaying cryptoPrimitives.py.
+

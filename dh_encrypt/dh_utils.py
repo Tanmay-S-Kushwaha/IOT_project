@@ -1,8 +1,8 @@
 import urandom
 # Define the prime number p and generator g (for example purposes, use a larger safe prime)
 p = 0xFFFFFFFB  # Example of a large safe prime
-network_key=0xFFFB
-network_key=str(network_key).encode()
+# network_key=0xFFFFFFFB
+network_key=b'1118084954\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
 g = 2  # Common choice of generator
 
 def bit_length(n):
@@ -23,4 +23,6 @@ def generate_private_key():
 def exhange_keys():
     pass
     
+
+
 

@@ -1,3 +1,5 @@
+#server code
+
 import socket
 import _thread
 from time import sleep
@@ -10,10 +12,10 @@ port=1984
 
 def setup_client(conn):
     data=conn.recv(1024)
-#     internal_encryption = crypt(network_key)
-#     data=internal_encryption.decrypt(data)
+    internal_encryption = crypt(network_key)
+    data=internal_encryption.decrypt(data)
     client_public_key=int(data)
-    conn.sendall(str(public_key).encode())
+    conn.sendall(internal_encryption.encrypt(str(public_key)))
     shared_key= generate_shared_key(client_public_key, private_key)
     print("Shared Key obtained",shared_key)
     return shared_key

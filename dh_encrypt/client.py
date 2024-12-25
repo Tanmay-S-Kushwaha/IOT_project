@@ -1,3 +1,5 @@
+#client code
+
 import socket
 import _thread
 import network
@@ -35,11 +37,13 @@ def setup_client_node(server_ip, port,ip_end):
     start_client(server_ip,port)
     private_key = generate_private_key()
     public_key = generate_public_key(private_key)
-#     internal_encryption = crypt(network_key)
-#     s.sendall(internal_encryption.encrypt(str(public_key)))
-    s.sendall(str(public_key).encode())
+    internal_encryption = crypt(network_key)
+#     print(internal_encryption.encrypt(str(public_key)))
+    s.sendall(internal_encryption.encrypt(str(public_key)))
+#     s.sendall(str(public_key).encode())
     data = s.recv(1024)
-    server_public_key=int(data.decode())
+    data=internal_encryption.decrypt(data)
+    server_public_key=int(data)
     shared_key=generate_shared_key(server_public_key, private_key)
     print("Shared key:",shared_key)
     shared_key=str(shared_key).encode()
@@ -51,7 +55,7 @@ def setup_client_node(server_ip, port,ip_end):
     c = crypt(aes_key)
     _thread.start_new_thread(receive_messages, (s,))
     
-server_ip = '192.168.204.238'
+server_ip = '192.168.185.238'
 port = 1984
 
 setup_client_node(server_ip, port,ip_end="150")
